@@ -37,10 +37,7 @@ public class Packager{
     /// </summary>
     public static void BuildAssetResource(BuildTarget target)
     {
-        if (Directory.Exists(Util.DataPath))
-        {
-            Directory.Delete(Util.DataPath, true);
-        }
+        
         string streamPath = Application.streamingAssetsPath;
         if (Directory.Exists(streamPath))
         {
@@ -50,27 +47,23 @@ public class Packager{
         AssetDatabase.Refresh();
 
         maps.Clear();
-        if (AppConst.LuaBundleMode)
-        {
-            HandleLuaBundle();
-        }
-        else
-        {
-            HandleLuaFile();
-        }
-        if (AppConst.ExampleMode)
-        {
-            HandleExampleBundle();
-        }
-        HandleResBundle();//资源打包
-        string resPath = "Assets/" + "StreamingAssets";
-        BuildAssetBundleOptions options = BuildAssetBundleOptions.DeterministicAssetBundle |
-                                          BuildAssetBundleOptions.UncompressedAssetBundle;
-        BuildPipeline.BuildAssetBundles(resPath, maps.ToArray(), options, target);
-        BuildFileIndex();
+        //资源打包
 
-        string streamDir = Application.dataPath + "/" + AppConst.LuaTempDir;
-        if (Directory.Exists(streamDir)) Directory.Delete(streamDir, true);
+        string[] files = {
+                            "Assets/Res/Blade_girl/Character.prefab",
+                            "Assets/Res/Skeleton/Monster.prefab"
+                         };
+
+        AssetBundleBuild build = new AssetBundleBuild();
+        build.assetBundleName = "res.unity3d";
+        build.assetNames = files;
+        maps.Add(build);
+
+        //string resPath = "Assets/" + "StreamingAssets";
+        BuildAssetBundleOptions options =
+                                          BuildAssetBundleOptions.DeterministicAssetBundle |
+                                          BuildAssetBundleOptions.UncompressedAssetBundle;
+        BuildPipeline.BuildAssetBundles(streamPath, maps.ToArray(), options, target);
         AssetDatabase.Refresh();
     }
 }

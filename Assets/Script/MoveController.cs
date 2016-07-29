@@ -29,6 +29,7 @@ public class MoveController : MonoBehaviour {
     {
         ani = GetComponent<Animation>();
         sf = Camera.main.GetComponent<SmoothFollow>();
+        sf.target = transform;
         cc = GetComponent<CharacterController>();
         sf.ResetView();
     }
@@ -40,11 +41,12 @@ public class MoveController : MonoBehaviour {
     void OnFingerUp(int fingerIndex, Vector2 fingerPos, float timeHeldDown)
     {
         isPressDown = false;
-        ani.CrossFade("Idle");
+        if (!ani.IsPlaying("Skill"))
+            ani.CrossFade("Idle");
     }
     void Update()
     {
-        if(isPressDown)
+        if (isPressDown && Input.mousePosition.x != pos.x && Input.mousePosition.y != pos.y && !ani.IsPlaying("Skill"))
         {
             //设置角色的朝向（朝向当前坐标+摇杆偏移量）
             Quaternion r = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);

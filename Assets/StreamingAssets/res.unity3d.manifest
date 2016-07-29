@@ -1,0 +1,67 @@
+ManifestFileVersion: 0
+CRC: 3803352815
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 90155e8728a9b8471aea6ced610100df
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 50726dbbccb02ac2eb5ceb6314777fe0
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 111
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7af260b4b89f176469b7f8e515adebf7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c86d1fdaddd90be42b464b304609352d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f40c8c832ae7e944e9be3d0c81c931ee, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8fe836199273e184a911e0a3739cd702, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0b4eb3a400afab046abb8471a9d746d6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4d0c51bb0b6e93049af5e88f93826e3b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6c20815eb3063c24290a61b7020a1836, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ae942c9068183dc40a9d01f648273726, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0521d8d4213542541a77dcf8434f381e, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+- Class: 143
+  Script: {instanceID: 0}
+Assets:
+- Assets/Res/Blade_girl/Character.prefab
+- Assets/Res/Skeleton/Monster.prefab
+Dependencies: []
