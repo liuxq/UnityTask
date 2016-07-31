@@ -30,13 +30,20 @@ public class AI : MonoBehaviour {
 	//旋转状态，敌人自身旋转
 	private int rotation_state;
 	//记录敌人上一次思考时间
-	private float aiThankLastTime; 
+	private float aiThankLastTime;
+
+    private float preSkillCastTime = 0;
+
+    private CombatProperty combat;
+    private Object m_skill;
  
 	void Start ()
 	{
 		//初始话标志敌人状态 以及动画为循环播放
 		state = EMEMY_NORMAL;
         m_Ani = GetComponent<Animator>();
+        combat = GetComponent<CombatProperty>();
+        m_skill = Resources.Load("Skill2");
 	}
  
 	void Update ()
@@ -172,7 +179,13 @@ public class AI : MonoBehaviour {
             //当敌人与主角的距离小与3 敌人将开始面朝主角攻击
             if (distance <= 2)
             {
-                
+                if(Time.time - preSkillCastTime > 2.5)
+                {
+                    player.GetComponent<CombatProperty>().BeAttacked(combat.Attack);
+
+                    Instantiate(m_skill, transform.position, Quaternion.identity);
+                    preSkillCastTime = Time.time;
+                }
                 setEmemyState(EMEMY_ATTACK);
             }
             else

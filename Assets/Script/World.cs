@@ -21,7 +21,7 @@ public class World : MonoBehaviour {
 #else
         string.Empty;
 #endif
-        WWW www = WWW.LoadFromCacheOrDownload(PathURL + "/res.unity3d", 5);
+        WWW www = WWW.LoadFromCacheOrDownload(PathURL + "/res.unity3d", 6);
 
         // Wait for download to complete
         yield return www;
@@ -63,13 +63,12 @@ public class World : MonoBehaviour {
 
     void CharacterLoaded(GameObject character)
     {
-        //m_Character = Instantiate(character, new Vector3(0, m_terrain.SampleHeight(Vector3.zero), 0), Quaternion.identity) as GameObject;
+        m_Character = Instantiate(character, new Vector3(0, m_terrain.SampleHeight(Vector3.zero), 0), Quaternion.identity) as GameObject;
     }
 
     void MonsterLoaded(GameObject monster)
     {
-
-        //GameObject imonster = Instantiate(monster, new Vector3(0, m_terrain.SampleHeight(Vector3.zero), 4), Quaternion.identity) as GameObject;
-        //imonster.GetComponent<AI>().player = m_Character;
+        GameObject imonster = Instantiate(monster, new Vector3(0, m_terrain.SampleHeight(Vector3.zero), 4), Quaternion.identity) as GameObject;
+        imonster.GetComponent<AI>().player = m_Character;
     }
 }

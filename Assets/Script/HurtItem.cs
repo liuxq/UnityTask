@@ -48,6 +48,7 @@ public class HurtItem : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        this.transform.rotation = mainCamera.transform.rotation;
     }
 
 
