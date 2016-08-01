@@ -3,8 +3,9 @@ using System.Collections;
 using System;
 
 public class UI_MonsterSelect : MonoBehaviour {
-    public void CloseMonsterSelect()
+    public GameObject MonsterSelectPanel;
+    public void CloseOrOpenMonsterSelect()
     {
-        this.gameObject.SetActive(false);
+        MonsterSelectPanel.SetActive(!MonsterSelectPanel.activeSelf);
     }
 }

@@ -23,7 +23,7 @@ public class World : MonoBehaviour {
                 path = Application.dataPath + "/Raw/";
                 break;
             default:
-                path = Application.dataPath + "/" + "StreamingAssets" + "/";
+                path = "file://" + Application.dataPath + "/" + "StreamingAssets" + "/";
                 break;
         }
         return path;
@@ -33,8 +33,7 @@ public class World : MonoBehaviour {
     {
         // Start a download of the given URL
         string PathURL = AppContentPath();
-
-        WWW www = WWW.LoadFromCacheOrDownload(PathURL + "/res.unity3d", 0);
+        WWW www = WWW.LoadFromCacheOrDownload(PathURL + "res.unity3d", 13);
 
         // Wait for download to complete
         yield return www;
@@ -104,5 +103,8 @@ public class World : MonoBehaviour {
         //列表添加后用于刷新listView
         selectMonsterGrid.repositionNow = true;
     }
-    
+    public void Close()
+    {
+        Application.Quit();
+    }
 }
