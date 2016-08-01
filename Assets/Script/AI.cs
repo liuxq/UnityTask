@@ -10,13 +10,19 @@ public enum EnemyType
  
 public class AI : MonoBehaviour {
 
-    public Vector3 spawnPoint;
 	//敌人类型枚举 有策划人员选择
 	public EnemyType enemyType = EnemyType.Enemy1;
 
+    public GameObject m_base;
+    public GameObject m_head;
+
+    private CharacterController cc;
     private Animator m_Ani;
 	//主角游戏对象
 	public GameObject player;
+    public int index;
+
+    private bool isDead = false;
  
 	//敌人状态 普通状态 旋转状态 奔跑状态 追击主角状态 攻击主角状态
 	private const int EMEMY_NORMAL=0;
@@ -36,7 +42,16 @@ public class AI : MonoBehaviour {
 
     private CombatProperty combat;
     private Object m_skill;
+    
+    private float deadTime;
+
  
+    public void SetDead()
+    {
+        isDead = true;
+        deadTime = Time.time+5;
+        m_Ani.SetBool("bDead", true);
+    }
 	void Start ()
 	{
 		//初始话标志敌人状态 以及动画为循环播放
@@ -44,10 +59,27 @@ public class AI : MonoBehaviour {
         m_Ani = GetComponent<Animator>();
         combat = GetComponent<CombatProperty>();
         m_skill = Resources.Load("Skill2");
+        cc = GetComponent<CharacterController>();
 	}
  
 	void Update ()
 	{
+        if(isDead)
+        {
+            if(Time.time > deadTime)
+            {
+                Destroy(this.gameObject);
+                Transform trans = GameObject.Find("UI Root").transform.FindChild("MonsterPanel/Scroll View/UIGrid/" + index);
+                trans.gameObject.SetActive(false);
+                //GameObject.Find("UI Root").transform.FindChild("MonsterPanel/Scroll view/UIGrid").GetComponent<UIGrid>().repositionNow = true;
+            }
+            return;
+        }
+
+        if(!cc.isGrounded)
+        {
+            cc.Move(Vector3.down);
+        }
 		//根据策划选择的敌人类型 这里面会进行不同的敌人AI
 		switch(enemyType)
 		{
@@ -86,13 +118,6 @@ public class AI : MonoBehaviour {
 		}
 	}
  
-	int getRandom(int count)
-	{
- 
-		 return new System.Random().Next(count);
- 
-	}
- 
 	bool isAIthank()
 	{
 		//这里表示敌人每3秒进行一次思考
@@ -109,7 +134,7 @@ public class AI : MonoBehaviour {
 	void AIthankEnemyState(int count)
 	{
 		//开始随机数字。
-		int d = getRandom(count);
+        int d = Random.Range(0, count);
  
 		switch(d)
 		{
@@ -149,7 +174,7 @@ public class AI : MonoBehaviour {
             m_Ani.SetBool("bAttack", false);
             m_Ani.SetBool("bMove", true);
 			//当敌人为旋转时， 开始随机旋转的角度系数
-			rotation_state = getRandom(4);
+            rotation_state = Random.Range(0, 4);
 			break;
 		case EMEMY_CHASE:
             m_Ani.SetBool("bAttack", false);
@@ -174,17 +199,30 @@ public class AI : MonoBehaviour {
 		float distance = Vector3.Distance(player.transform.position,this.transform.position);
 
         //当敌人与主角的距离小于8 敌人将开始面朝主角追击
-        if (distance <= 8)
+        if(distance > 20)
+        {
+            m_base.SetActive(false);
+            m_head.SetActive(false);
+        }
+        else
+        {
+            m_base.SetActive(true);
+            m_head.SetActive(true);
+        }
+
+        if (distance <= 8 && !player.GetComponent<CombatProperty>().IsDead())
         {
             //当敌人与主角的距离小与3 敌人将开始面朝主角攻击
             if (distance <= 2)
             {
                 if(Time.time - preSkillCastTime > 2.5)
                 {
-                    player.GetComponent<CombatProperty>().BeAttacked(combat.Attack);
-
-                    Instantiate(m_skill, transform.position, Quaternion.identity);
-                    preSkillCastTime = Time.time;
+                    if(player.GetComponent<CombatProperty>().BeAttacked(combat.Attack))
+                    {
+                        Instantiate(m_skill, transform.position, Quaternion.identity);
+                        preSkillCastTime = Time.time;
+                    }
+                    
                 }
                 setEmemyState(EMEMY_ATTACK);
             }
