@@ -13,7 +13,6 @@ public class CombatProperty : MonoBehaviour {
     public bool isPlayer;
 
     private Object m_goDamage;
-    private Animator m_animator;
     private Animation m_animation;
     private AI m_ai;
 
@@ -23,7 +22,6 @@ public class CombatProperty : MonoBehaviour {
         if (!isPlayer)
         {
             m_ai = GetComponent<AI>();
-            m_animator = GetComponent<Animator>();
         }
         else
             m_animation = GetComponent<Animation>();

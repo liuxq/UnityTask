@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 137287763
+CRC: 4250306937
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f171208f5fb1d2b47d80621dba010552
+    Hash: b36764a30ab4103d681d6ccd3d580499
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c3ddefb0f77c8008725b0620cc15c223
+    Hash: 340366a855952aefa3f8c8774c87a416
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -55,9 +55,13 @@ ClassTypes:
   Script: {fileID: 11500000, guid: f40c8c832ae7e944e9be3d0c81c931ee, type: 3}
 - Class: 115
   Script: {instanceID: 0}
+- Class: 119
+  Script: {instanceID: 0}
 - Class: 137
   Script: {instanceID: 0}
 - Class: 143
+  Script: {instanceID: 0}
+- Class: 195
   Script: {instanceID: 0}
 Assets:
 - Assets/Res/Blade_girl/Character.prefab

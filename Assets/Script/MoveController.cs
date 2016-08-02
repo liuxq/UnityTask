@@ -13,7 +13,6 @@ public class MoveController : MonoBehaviour {
     private Transform moveDes;
     private CombatProperty combat;
     private Object m_skill;
-    private float gravity = 9.8f;
 
     void OnEnable()
     {

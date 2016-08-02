@@ -33,7 +33,8 @@ public class World : MonoBehaviour {
     {
         // Start a download of the given URL
         string PathURL = AppContentPath();
-        WWW www = WWW.LoadFromCacheOrDownload(PathURL + "res.unity3d", 13);
+        Caching.CleanCache();
+        WWW www = WWW.LoadFromCacheOrDownload(PathURL + "res.unity3d", 0);
 
         // Wait for download to complete
         yield return www;
@@ -84,7 +85,7 @@ public class World : MonoBehaviour {
         {
             int x = Random.Range(-30, 30);
             int z = Random.Range(-30, 30);
-            GameObject imonster = Instantiate(monster, new Vector3(x, m_terrain.SampleHeight(new Vector3(x,0,z))+0.1f, z), Quaternion.identity) as GameObject;
+            GameObject imonster = Instantiate(monster, new Vector3(x, m_terrain.SampleHeight(new Vector3(x, 0, z)) + 0.1f, z), Quaternion.identity) as GameObject;
             imonster.name = "Monster" + i;
             imonster.GetComponent<AI>().player = m_Character;
             imonster.GetComponent<AI>().index = i;
